@@ -52,52 +52,8 @@ const DisplayQuote = ({ quoteToDisplay, colortouse }) => {
 }
 
 const Quote = ({ quoteToDisplay, factAuthor, colortouse, isFetching }) => {
-  const [quote, setQuote] = useState({ fact: "", author: "" })
-
-  useEffect(() => {
-    if (window.localStorage.getItem("dataQuotes") === null) {
-      const fetchQuote = async () => {
-        try {
-          const getQuote = await fetch("https://type.fit/api/quotes")
-          let getData = await getQuote.json()
-          window.localStorage.setItem("dataQuotes", JSON.stringify(getData))
-          setQuote({ fact: dataToSet.text, author: dataToSet.author || "Anonymous" })
-        } catch (error) {
-          console.log("error:", error)
-        }
-      }
-      fetchQuote()
-    }
-
-    let dataToUse = JSON.parse(window.localStorage.getItem("dataQuotes"))
-    let whichUse = getRandomQuote(0, dataToUse)
-    let dataToSet = dataToUse[whichUse]
-    setQuote({ fact: dataToSet.text, author: dataToSet.author || "Anonymous" })
-  }, [])
-
-  if (quoteToDisplay === "" && quote.fact === "") {
+  if (quoteToDisplay === "") {
     return <Loader />
-  }
-
-  if (isFetching) {
-    return (
-      <>
-        <>
-          {quoteToDisplay === "" ? (
-            <>
-              <DisplayQuote quoteToDisplay={quote.fact} />
-            </>
-          ) : (
-            <>
-              <DisplayQuote quoteToDisplay={quoteToDisplay} />
-            </>
-          )}
-        </>
-        <Autor key={colortouse} colortouse={"white"}>
-          — {factAuthor || quote.author}
-        </Autor>
-      </>
-    )
   }
 
   return (
@@ -105,7 +61,7 @@ const Quote = ({ quoteToDisplay, factAuthor, colortouse, isFetching }) => {
       <>
         {quoteToDisplay === "" ? (
           <>
-            <DisplayQuote quoteToDisplay={quote.fact} colortouse={colortouse} />
+            <DisplayQuote quoteToDisplay={quoteToDisplay} colortouse={colortouse} />
           </>
         ) : (
           <>
@@ -117,7 +73,7 @@ const Quote = ({ quoteToDisplay, factAuthor, colortouse, isFetching }) => {
         )}
       </>
       <Autor key={colortouse} colortouse={colortouse} className="fadeThis">
-        — {factAuthor || quote.author}
+        — {factAuthor || "Anonymous"}
       </Autor>
     </>
   )
