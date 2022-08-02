@@ -81,6 +81,8 @@ const useMainCardUI = () => {
           const getQuote = await fetch("https://type.fit/api/quotes")
           let getData = await getQuote.json()
           window.localStorage.setItem("dataQuotes", JSON.stringify(getData))
+          let whichUse = getRandomQuote(0, getData)
+          let dataToSet = getData[whichUse]
           setQuote({
             fact: dataToSet.text,
             author: dataToSet.author || "Anonymous"
@@ -92,10 +94,17 @@ const useMainCardUI = () => {
       fetchQuote()
     }
 
-    let dataToUse = JSON.parse(window.localStorage.getItem("dataQuotes"))
-    let whichUse = getRandomQuote(0, dataToUse)
-    let dataToSet = dataToUse[whichUse]
-    setQuote({ fact: dataToSet.text, author: dataToSet.author || "Anonymous" })
+    try {
+      let dataToUse = JSON.parse(window.localStorage.getItem("dataQuotes"))
+      let whichUse = getRandomQuote(0, dataToUse)
+      let dataToSet = dataToUse[whichUse]
+      setQuote({ fact: dataToSet.text, author: dataToSet.author || "Anonymous" })
+    } catch (error) {
+      console.log('error:', error)
+
+    }
+
+
   }, [])
 
   const GetNewQuote = () => {
