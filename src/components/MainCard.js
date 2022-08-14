@@ -4,15 +4,18 @@ import { TwitterLogo, TumblrLogo } from "../icons/index.js"
 import Quote from "./Quote.js"
 import randomHSL from "../utils/randomHSL.js"
 import getRandomQuote from "../utils/getRandomQuote.js"
+import Creator from "./Creator.js"
 
 const WrapAll = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  margin-right: 25px;
+  margin-left: 25px;
+  
 `
 const MainCard = styled.div`
   // Global backgound color here -> Box shadow color more darker
-  width: 550px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +76,7 @@ const useMainCardUI = () => {
   const [quote, setQuote] = useState({ fact: "", author: "" })
   const [color, setColor] = useState({ plain: "", blurred: "" })
   const [isFetching, setIsFetching] = useState(false)
-
+  
   useEffect(() => {
     if (window.localStorage.getItem("dataQuotes") === null) {
       const fetchQuote = async () => {
@@ -164,7 +167,9 @@ const useMainCardUI = () => {
     colortouse: color.plain,
     renderMainCardUI: (
       <WrapAll>
+        
         <MainCard blurred={color.blurred}>
+        
           <WrapAllContentCard>
             <Quote
               quoteToDisplay={quote.fact}
@@ -201,7 +206,9 @@ const useMainCardUI = () => {
               </FooterRight>
             </FooterWrap>
           </WrapAllContentCard>
+          
         </MainCard>
+        <Creator />
       </WrapAll>
     )
   }

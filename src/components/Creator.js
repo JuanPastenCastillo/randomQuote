@@ -1,34 +1,66 @@
 import React from "react"
 import styled from "styled-components"
+import { GitHubIcon, LinkedinIcon } from "../utils/indexIcons.js"
 
-const A = styled.a`
-  background-color: hsl(0, 3.6%, 11%);
-  padding: 0.4rem;
-  border-radius: 5px;
-  text-decoration: none;
-  color: whitesmoke;
-  margin-top: 15px;
-  box-shadow: 0.5px 0.5px 0.6px whitesmoke, 0.7px 0.7px 1.1px -1.2px whitesmoke,
-    1.5px 1.5px 2.5px -2.5px whitesmoke;
+export const CreatorWrapper = styled.div`
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
 
-  &:hover {
-    background-color: hsl(208, 100%, 97.1%);
-    color: black;
-    box-shadow: 0.5px 0.5px 0.6px black, 0.7px 0.7px 1.1px -1.2px black,
-      1.5px 1.5px 2.5px -2.5px black;
+  h2 {
+    font-size: calc(0.8rem + 1vw);
+    text-align: center;
+    margin-bottom: 0px;
+  }
+  
+  span{
+    color: hsl(136, 85.6%, 35%);
+  }
+
+  a {
+    fill: hsl(72, 100%, 98%) ;
+  }
+
+  a:hover {
+    fill: hsl(60, 6.2%, 87.5%);
+  }
+
+  a > svg {
+    width: 100%;
+    
+    height: calc(2rem + 2vh);
   }
 `
+
+export const WrapIcons = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+export const GitHubIconStyled = styled(GitHubIcon)`
+`
+export const LinkedinIconStyled = styled(LinkedinIcon)`
+`
+
 
 const Creator = () => {
   return (
     <>
-      <A
-        href="https://www.linkedin.com/in/juanpastencastillo/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        By Juan Pastén Castillo
-      </A>
+      <CreatorWrapper>
+        <h2>By Juan Pastén Castillo</h2>
+        <WrapIcons>
+          <a href="https://github.com/JuanPastenCastillo"
+          target="blank"
+          rel="noreferrer">
+            <GitHubIconStyled />
+          </a>
+          <a href="https://www.linkedin.com/in/juanpastencastillo/"
+          target="blank"
+          rel="noreferrer">
+            <LinkedinIconStyled />
+          </a>
+        </WrapIcons>
+      </CreatorWrapper>
     </>
   )
 }

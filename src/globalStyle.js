@@ -12,11 +12,11 @@ const opacityCSS = keyframes`
 
 const GlobalStyle = createGlobalStyle`
 *{
-  transition: all 1.2s ease;
+  transition: all 0.5s ease;
 }
 
 .fadeThis{
-  animation:${opacityCSS} 1.2s ease normal;
+  animation:${opacityCSS} 0.5s ease normal;
   
 }
 
